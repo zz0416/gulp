@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+
+<head>
+    <meta charset="utf-8" />
+    <title>试验</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.5.0-beta.0/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="BoxCtrl">
+        <div style="width: 100px; height: 100px; background-color: red;" ng-click="click()"></div>
+        <p>{{ w }} x {{ h }}</p>
+        <p>W:
+            <input type="number" ng-model="w" />
+        </p>
+        <p>H:
+            <input type="number" ng-model="h" />
+        </p>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+    var myApp = angular.module('MyApp', []);
+    myApp.controller("BoxCtrl", ['$scope', '$element', function($scope,$element) {
+        var e = $element.children().eq(0);
+        $scope.w = e.width();
+        $scope.h = e.height();
+
+        $scope.click = function() {
+            $scope.w = parseInt($scope.w) + 10;
+            $scope.h = parseInt($scope.h) + 10;
+            $scope.$apply();
+        }
+
+        // $scope.$watch('w',
+        //     function(to, from) {
+        //         e.width(to);
+        //     }
+        // );
+
+        // $scope.$watch('h',
+        //     function(to, from) {
+        //         e.height(to);
+        //     }
+        // );
+    }]);
+    </script>
+</body>
+
+</html>
